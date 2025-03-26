@@ -27,7 +27,7 @@ int main(void)
 
     if (arr.size < arr.cap)
     {
-        arr.elements[arr.size] = 50;
+        arr.elements[arr.size] = 20;
         arr.size++;
     }
     else

@@ -3,7 +3,7 @@
 int main(void)
 {
     int age = 24;
-    int* p = &age;
+    int *p = &age;
 
     printf("%i", *p);
 

@@ -16,7 +16,7 @@ int main(void)
 
     for (k = 0; k < 3; k++)
     {
-        volume = boxes[k].h*boxes[k].w*boxes[k].l;
+        volume = boxes[k].h * boxes[k].w * boxes[k].l;
         printf("box %i volume%i\n", k, volume);
     }
 
