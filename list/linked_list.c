@@ -42,11 +42,31 @@ bool void_list(linked_list *list)
 
 void empty_list(linked_list *list)
 {
-    if (full_list(&list))
+    if (list == NULL)
     {
-        list->head = NULL;
+        return;
     }
 
+    node *ptr = list->head;
+    node *next_node;
+
+    while (ptr != NULL)
+    {
+        next_node = ptr->next;
+        free(ptr);
+        ptr = next_node;
+    }
+
+
+    list->head = NULL;
+    list->end = NULL;
+    list->size = 0;
+}
+
+
+void destroy_list(linked_list *list)
+{
+    empty_list(&list);
     free(list);
 }
 
@@ -171,9 +191,77 @@ bool ordered_list(linked_list *list)
 
 linked_list copy_list(linked_list *list1)
 {
-    linked_list *list2;
+    linked_list list2;
     created_list(&list2);
     
-    
+    node *ptr = list1->head;
+    while (ptr != NULL)
+    {
+        insert_element(&list2, ptr->data);
+        ptr = ptr->next;
+    }
+
+    return list2;
+}
+
+
+linked_list copy_remove_duplicate(linked_list *list1)
+{
+    linked_list list2;
+    created_list(&list2);
+
+    node *ptr = list1->head;
+    while (ptr != NULL)
+    {
+        bool is_existed = false;
+        node *check_list2 = list2.head;
+
+        while (check_list2 != NULL)
+        {
+            if (check_list2->data == ptr->data)
+            {
+                is_existed = true;
+                break;
+            }
+            check_list2 = check_list2->next;
+        }
+
+        if (!is_existed)
+        {
+            insert_element(&list2, ptr->data);
+        }
+
+        ptr = ptr->next;
+    }
+
+    return list2;
+}
+
+
+void invert_listOrigin(linked_list *list)
+{
+    node *prev = NULL;
+    node *currency = list->head;
+    node *next = NULL;
+
+    while (currency != NULL)
+    {
+        next = currency->next;
+        currency->next = prev;
+        prev = currency;
+        currency = next;
+    }
+
+    list->head = prev;
+}
+
+
+linked_list invert_list1_to_list2(linked_list *list1)
+{
     
 }
+
+
+
+
+
