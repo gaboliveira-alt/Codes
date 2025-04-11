@@ -59,7 +59,7 @@ void empty_list(linked_list *list)
         ptr = next_node;
     }
 
-    
+
     list->head = NULL;
     list->end = NULL;
     list->size = 0;
@@ -233,15 +233,18 @@ void print_list(linked_list *list)
     node *ptr = list;
     while (ptr != NULL)
     {
-        printf("Elements: %d ->", ptr->data);
+        printf("Elements: -> %d", ptr->data);
         ptr = ptr->next;
     }
+
+    return 0;
 }
 
 
 void count_elements(linked_list *list)
 {
     printf("Number of elements: %d", list->size); 
+    return 0;
 }
 
 
@@ -350,6 +353,7 @@ void invert_listOrigin(linked_list *list)
     }
 
     list->head = prev;
+    return 0;
 }
 
 
@@ -439,12 +443,74 @@ void remove_all_repeats(linked_list *list)
 
         ptr = ptr->next;
     }
+
+    return 0;
 }
 
 
 void remove_repeats(linked_list *list, int item)
 {
+    node *ptr = list->head;
+    node *prev = NULL;
 
+    while (ptr != NULL)
+    {
+        if (ptr->data == item)
+        {
+            node *to_remove = ptr;
+
+            if (prev == NULL)
+            {
+                list->head = ptr->next;
+            }
+            else
+            {
+               prev->next = ptr->next; 
+            }
+
+            if (ptr == list->end)
+            {
+                list->end = prev;
+            }
+
+            ptr = ptr->next;
+            free(to_remove);
+            list->size--;
+        }
+        else
+        {
+            prev = ptr;
+            ptr = ptr->next;
+        }
+    }
+
+    return 0;
+}
+
+
+void search_item(linked_list *list, int position, int *return_value)
+{
+    if (position <= 0 && position >= list->size)
+    {
+        printf("Erro ao procurar item desejado\n");
+        return;
+    }
+
+    if (void_list(&list))
+    {
+        printf("Lista vazia\n");
+        return;
+    }
+
+
+    node *ptr = list->head;
+    for (int i = 0; i < position; i++)
+    {
+        ptr = ptr->next;
+    }
+
+    return_value = ptr->data;
+    return 0;
 }
 
 
