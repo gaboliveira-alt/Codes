@@ -59,7 +59,7 @@ void empty_list(linked_list *list)
         ptr = next_node;
     }
 
-
+    
     list->head = NULL;
     list->end = NULL;
     list->size = 0;
@@ -408,18 +408,33 @@ linked_list join_ordered_lists(linked_list *list1, linked_list *list2)
 }
 
 
-void remove_repeats(linked_list *list, int item)
+void remove_all_repeats(linked_list *list)
 {
     node *ptr = list->head;
 
     while (ptr != NULL)
     {
-        bool is_existed = false;
+        node *currency = ptr;
 
-        if (ptr->data == item)
+        while (currency->next != NULL)
         {
-            is_existed = true;
-            break;
+            if (currency->next->data == ptr->data)
+            {
+                node *to_remove = currency->next;
+                currency->next = currency->next->next;
+
+                if (to_remove == list->end)
+                {
+                    list->end = currency;
+                }
+
+                free(to_remove);
+                list->size--;
+            }
+            else
+            {
+                currency = currency->next;
+            }
         }
 
         ptr = ptr->next;
@@ -427,6 +442,9 @@ void remove_repeats(linked_list *list, int item)
 }
 
 
+void remove_repeats(linked_list *list, int item)
+{
 
+}
 
 
