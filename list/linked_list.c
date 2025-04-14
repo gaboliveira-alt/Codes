@@ -349,6 +349,7 @@ void invert_listOrigin(linked_list *list)
         next = currency->next;
         currency->next = prev;
         prev = currency;
+        
         currency = next;
     }
 
@@ -371,6 +372,7 @@ linked_list invert_list1_to_list2(linked_list *list1)
         next = currency->next;
         currency->next = prev;
         prev = currency;
+        
         currency = next;
     }
 
