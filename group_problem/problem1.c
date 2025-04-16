@@ -17,6 +17,7 @@ group;
 void create_groups(group new_groups[], int quantity_groups);
 void insert_members(group *new_group, int people);
 void print_groups(group new_groups[], int quantity_groups);
+void search_person(group new_groups[], int quantity_groups, int target);
 
 
 int main()
@@ -61,6 +62,7 @@ int main()
     while (strcmp(confirmation, "nao") != 0);
 
     print_groups(new_groups, quantity_groups);
+    search_person(new_groups, quantity_groups, 2);
 
     return 0;
 }
@@ -97,16 +99,25 @@ void print_groups(group new_groups[], int quantity_groups)
             printf("Pessoas: %d\n", new_groups->group_elements[j]);
         }
     }
+    printf("\n");
 }
 
 
 void search_person(group new_groups[], int quantity_groups, int target)
 {
-    for (int i = 0; i < quantity_groups; i++)
+    printf("Grupos disponiveis para busca: %d\n", quantity_groups);
+
+    int choice_group;
+    printf("Escolha o grupo que deseja buscar: \n");
+    scanf("%d", &choice_group);
+
+    
+    for (int g = 0; g < new_groups[choice_group - 1].size; g++)
     {
-        for (int j = 0; j < new_groups[i].size; j++)
+        if (target == new_groups[choice_group - 1].group_elements[g])
         {
-            // encontrar o valor ....                        
+            printf("Valor encontrado: %d\n", new_groups->group_elements[g]);
         }
     }
+    printf("\n");
 }
