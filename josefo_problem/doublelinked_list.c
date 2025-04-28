@@ -220,5 +220,41 @@ void view_soldiers(linked_list *list)
 
 void josefo(linked_list *list, int jump)
 {
+    node *aux;
     
+    if (jump > 0)
+    {
+        node *soldier = list->sentinel->next;
+        int counter = 1;
+
+        
+        while (1)
+        {
+            if (soldier->soldier_number != 0)
+            {
+                if (list->size == 1)
+                {
+                    printf("O ultimo soldado: %d", soldier->soldier_number);
+                    break;
+                }
+
+                if (counter == jump)
+                {
+                    aux = soldier->next;
+                    remove_soldier(list, soldier->soldier_number);
+                    counter = 1;
+                    soldier = aux;
+                    jump = insert_jump();
+                }
+                else
+                {
+                    soldier = soldier->next;
+                    counter++;
+                }
+        }
+        else
+        {
+            soldier = soldier->next;
+        }
+    }
 }
