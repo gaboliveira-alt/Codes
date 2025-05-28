@@ -45,11 +45,42 @@ int full_queue(static_queue *queue)
 
 void print_queue(static_queue *queue)
 {
+    if (empty_queue)
+    {
+        return -1;
+    }
+
+    printf("Fila: [ ");
+    int position = queue->init;
     for (int i = 0; i < queue->size; i++)
     {
-        printf("Fila: %d ", i);
+        printf("%d", queue->items[position]);
+
+        if (i < queue->size - 1)
+        {
+            printf(", ");
+        }
+
+        position = (position + 1) % MAX_ELEMENTS;
     }
-    printf("\n");
+    printf(" ]");
+}
+
+
+int front(static_queue *queue)
+{
+    if (empty_queue)
+    {
+        return -1;
+    }
+
+    return queue->items[queue->init];
+}
+
+
+void queue_size(static_queue *queue)
+{
+    return queue->size;
 }
 
 
@@ -60,7 +91,22 @@ bool enqueue(static_queue *queue, int value)
         return false;
     }
 
-    queue->end[queue->size] = value;
-    queue->size++;
+    queue->items[queue->end] = value;
+    queue->end = (queue->end + 1) % MAX_ELEMENTS;
+    queue->size++
     return true;
+}
+
+
+int dequeue(static_queue *queue)
+{
+    if (empty_queue)
+    {
+        return false;
+    }
+
+    int removed_value = queue->items[queue->init];
+    queue->init = (queue->init + 1) % MAX_ELEMENTS;
+    queue->size--;
+    return removed_value;
 }
