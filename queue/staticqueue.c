@@ -45,7 +45,7 @@ int full_queue(static_queue *queue)
 
 void print_queue(static_queue *queue)
 {
-    if (empty_queue)
+    if (empty_queue(queue))
     {
         return -1;
     }
@@ -69,7 +69,7 @@ void print_queue(static_queue *queue)
 
 int front(static_queue *queue)
 {
-    if (empty_queue)
+    if (empty_queue(queue))
     {
         return -1;
     }
@@ -86,7 +86,7 @@ void queue_size(static_queue *queue)
 
 bool enqueue(static_queue *queue, int value)
 {
-    if (full_queue)
+    if (full_queue(queue))
     {
         return false;
     }
@@ -100,7 +100,7 @@ bool enqueue(static_queue *queue, int value)
 
 int dequeue(static_queue *queue)
 {
-    if (empty_queue)
+    if (empty_queue(queue))
     {
         return false;
     }
